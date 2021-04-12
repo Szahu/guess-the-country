@@ -13,7 +13,7 @@ export const getData = (callback) => {
 
 export const getCountryPopulation = function (countryCode, callback) {
 
-    const response = fetch(`http://api.worldbank.org/v2/country/${countryCode}/indicator/SP.POP.TOTL?format=json`)
+    fetch(`https://api.worldbank.org/v2/country/${countryCode}/indicator/SP.POP.TOTL?format=json`)
     .then(res => res.json())
     .then(data => { callback(data[1][1].value)}); 
     
