@@ -2,8 +2,18 @@
 export const correctColor = '#95D575';
 export const wrongColor = '#DE3C66';
 
+export const hasADublet = (array) => {
+  for(let i = 0;i<array.length;i++) {
+    for(let j = 0;j < array.length;j++) {
+      if(i === j) {continue;}
+      if(array[i] === array[j]) {return true;}
+    }
+  }
+  return false;
+}
+
 //fethching json with list of all countries
-export const fetchCountriesList = (callback) => {
+export const fetchCountriesList = async (callback) => {
     fetch('countryList.json', {headers: {
       'Content-Type': 'applicaton/json',
       'Accept': 'application/json'
@@ -17,8 +27,8 @@ export const fetchCountriesList = (callback) => {
 }
 
 //calling worldbak api to get population by country code
-export const getCountryPopulation = function (countryCode, callback) {
-    fetch(`https://api.worldbank.org/v2/country/${countryCode}/indicator/SP.POP.TOTL?format=json`)
+export const getCountryPopulation = async function (countryCode, callback) {
+    await fetch(`https://api.worldbank.org/v2/country/${countryCode}/indicator/SP.POP.TOTL?format=json`)
     .then(res => res.json())
     .then(data => { callback(data[1][1].value)}); 
 }
@@ -44,6 +54,7 @@ export function populationToFormatedString(population) {
         return popString.slice(0, 2) + ' thousand';
       default:
         console.error('something went wrong');
+        return 'gotta add more cases to the switch statement'
     }
   } else {
     return 0;

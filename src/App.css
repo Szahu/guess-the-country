@@ -27,7 +27,7 @@
 #mainCard {
     position: absolute;
     width: 500px;
-    height: 600px;
+    height: 650px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -79,6 +79,18 @@ button {
     cursor: pointer;
 }
 
+#staticCountryButton {
+    font-size: 25px; 
+    border: none;
+    text-decoration: none;
+    box-shadow: 0px 0px 6px 3px rgba(0.4, 0.4, 0.4, 0.2);
+    border-radius: 15px;
+    
+    background-color: white;
+    word-wrap: break-word;
+
+}
+
 button:after {
     transition: 0.5s;
 }
@@ -95,4 +107,18 @@ button:hover:after {
 button:focus {
     outline: none;
     background-color: red;
+}
+
+#nextButton {
+    position: relative;
+    margin: auto;
+    padding: 10px 30px 10px 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 30px;
+}
+
+#nextButton:focus {
+    
+    background-color: white;
 }
