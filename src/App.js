@@ -12,17 +12,26 @@ const MainCard = (props) => {
     const [guessCasted, setGuessCasted] = useState(false);
     const onClickCallback = (index) => {setGuessCasted(true); setPressedIndex(index);}
 
+    const chooseRightColor = (i) => {
+      if(guessCasted) {
+        if(i===pressedIndex && i===props.correctOne) {return correctColor;}
+        else if(i===pressedIndex) {return wrongColor;} 
+        else if(i===props.correctOne) {return correctColor}
+        else {return 'white';}
+      }
+    }
+
     const correctButton = (country, i) => {
       if(!guessCasted) {
-        return <CountryButton key={country.name} onClick={onClickCallback} index={i} isCorrect={ i===props.correctOne ? true : false}
-        color={ guessCasted ? i===pressedIndex && i===props.correctOne ? correctColor : i===pressedIndex ?  wrongColor : i===props.correctOne ? correctColor : 'white' : 'white'} label={country.name}/>
+        return <CountryButton key={country.name} onClick={onClickCallback} index={i}
+        color={chooseRightColor(i)} label={country.name}/>
       } else if(guessCasted) {
         return <StaticCountryButton key={country.name} color={ guessCasted ? i===pressedIndex && i===props.correctOne ? correctColor : i===pressedIndex ?  wrongColor : i===props.correctOne ? correctColor : 'white' : 'white'} label={country.name}/>
       }
     }
 
     return <div id="mainCard">
-      <TitleComponent key='titleComponent' population={populationToFormatedString(props.countries[0].population)}/>
+      <TitleComponent key='titleComponent' population={populationToFormatedString(props.countries[props.correctOne].population)}/>
       {props.countries.map((country, i) => {
         return correctButton(country, i);}
       )}
