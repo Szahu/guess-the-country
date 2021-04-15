@@ -30,8 +30,6 @@ const MainCard = (props) => {
     </div>
 }
 
-//EDJKFHJDFKHGJIHG
-
 const CountryButton = (props) => {
   return <button id="countryButton" onClick={() => props.onClick(props.index)} style={{backgroundColor: props.color}}>{props.label}</button>
 }
