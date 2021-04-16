@@ -133,7 +133,7 @@ function App() {
     <div>
     <div className="background-image"></div>
       <div className="content">
-      <MainComponent/>
+      <MainComponent/>    
       </div>
     </div>
   );
