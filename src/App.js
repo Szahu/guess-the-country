@@ -3,10 +3,10 @@ import { getCountryPopulation, populationToFormatedString, correctColor, wrongCo
 import './App.css';
 
 // TODO: 
-//   -add api data caching
-//   -display population of each country
-//   -make next button unclickable until guess Is casted
-  
+//   [ ] -add api data caching
+//   [ ] -display population of each country
+//   [x] -make next button unclickable until guess Is casted
+//   [ ] -keep the score
 
 const MainCard = (props) => {
 
