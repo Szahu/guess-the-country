@@ -37,7 +37,7 @@ const MainCard = (props) => {
       {props.countries.map((country, i) => {
         return correctButton(country, i);}
       )}
-      <ResetButton callback={() => {props.resetCallback(); setGuessCasted(false)}}/>
+      <ResetButton callback={() => {props.resetCallback(); setGuessCasted(false)}} guessCasted={guessCasted}/>
     </div>
 }
 
@@ -50,7 +50,7 @@ const StaticCountryButton = (props) => {
 }
 
 const ResetButton = (props) => {
-  return <button id="nextButton" onClick={props.callback}>Next</button>
+  return <button id={props.guessCasted ? "nextButton" : "nextButtonUnclickable"} onClick={props.guessCasted ? props.callback : null}>Next</button>
 }
 
 const TitleComponent = (props) => {
