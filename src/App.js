@@ -5,6 +5,7 @@ import './App.css';
 // TODO: 
 //   -add api data caching
 //   -display population of each country
+//   -make next button unclickable until guess Is casted
   
 
 const MainCard = (props) => {
