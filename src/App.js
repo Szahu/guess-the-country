@@ -7,6 +7,7 @@ import './App.css';
 //   [ ] -display population of each country
 //   [x] -make next button unclickable until guess Is casted
 //   [x] -keep the score 
+//   [ ] -not turn button red on focus
 
 const MainCard = (props) => {
 
