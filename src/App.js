@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { getCountryPopulation, fetchCountriesList, populationToFormatedString, correctColor, wrongColor, hasADublet } from "./utils";
+import { getCountryPopulation, populationToFormatedString, correctColor, wrongColor, hasADublet } from "./utils";
 import './App.css';
 
-const TitleComponent = (props) => {
-  return <p id="titleText">The country with population of <br/> <strong style={{fontSize: '33px'}}>{props.population}</strong> is:</p>
-}
+// TODO: 
+//   -add api data caching
+//   -display population of each country
+  
 
 const MainCard = (props) => {
 
@@ -49,6 +50,10 @@ const StaticCountryButton = (props) => {
 
 const ResetButton = (props) => {
   return <button id="nextButton" onClick={props.callback}>Next</button>
+}
+
+const TitleComponent = (props) => {
+  return <p id="titleText">The country with population of <br/> <strong style={{fontSize: '33px'}}>{props.population}</strong> is:</p>
 }
 
 class MainComponent extends React.Component {
