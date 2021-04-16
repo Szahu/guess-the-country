@@ -6,13 +6,23 @@ import './App.css';
 //   [ ] -add api data caching
 //   [ ] -display population of each country
 //   [x] -make next button unclickable until guess Is casted
-//   [ ] -keep the score
+//   [x] -keep the score
 
 const MainCard = (props) => {
 
     const [pressedIndex, setPressedIndex] = useState(-1);
     const [guessCasted, setGuessCasted] = useState(false);
-    const onClickCallback = (index) => {setGuessCasted(true); setPressedIndex(index);}
+    const [score, setScore] = useState(0);
+    const [totalGuesses, setTotalGuesses] = useState(0);
+    const evaluateGuess = (index) => {return index===props.correctOne ? true : false};
+    const onClickCallback = (index) => {
+      setGuessCasted(true); 
+      setPressedIndex(index);
+      if(evaluateGuess(index)) {
+        setScore(score+1);
+      }
+        setTotalGuesses(totalGuesses+1);
+      }
 
     const chooseRightColor = (i) => {
       if(guessCasted) {
@@ -37,6 +47,7 @@ const MainCard = (props) => {
       {props.countries.map((country, i) => {
         return correctButton(country, i);}
       )}
+      <ScoreDisplay score={score} total={totalGuesses}/>
       <ResetButton callback={() => {props.resetCallback(); setGuessCasted(false)}} guessCasted={guessCasted}/>
     </div>
 }
@@ -55,6 +66,10 @@ const ResetButton = (props) => {
 
 const TitleComponent = (props) => {
   return <p id="titleText">The country with population of <br/> <strong style={{fontSize: '33px'}}>{props.population}</strong> is:</p>
+}
+
+const ScoreDisplay = (props) => {
+  return <div id="scoreDisplay">Score: {props.score} / {props.total}</div>
 }
 
 class MainComponent extends React.Component {
