@@ -8,6 +8,7 @@ import './App.css';
 //   [x] -make next button unclickable until guess Is casted
 //   [x] -keep the score 
 //   [ ] -not turn button red on focus
+//   [ ] -update population roundign algorithym
 
 const MainCard = (props) => {
 
