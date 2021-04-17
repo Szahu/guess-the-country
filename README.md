@@ -10,3 +10,4 @@ This project can be previewd in action [Here:](https://szahu.github.io/guess-the
 - [ ] Update population rounding algorithm
 - [ ] Add other geographical indicators
 - [ ] Fetch countryList json from a cloud source
+- [ ] Make buttons unclickable upon loading
