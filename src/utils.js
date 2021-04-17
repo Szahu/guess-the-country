@@ -39,19 +39,19 @@ export function populationToFormatedString(population) {
     let popString = population.toString();
     switch(popString.length) {
       case 9:
-        return popString.slice(0, 3) + ' million';
+        return popString.slice(0, 3) + ',' + popString[4] + ' million';
       case 8:
-        return popString.slice(0, 2) + ' million';
+        return popString.slice(0, 2)  + ',' + popString[3] + ' million';
       case 7:
-        return popString.slice(0, 1) + ' million';
+        return popString.slice(0, 1)  + ',' + popString[2] + ' million';
       case 6:
-        return popString.slice(0, 3) + ' thousand';
+        return popString.slice(0, 3)  + ',' + popString[4] + ' thousand';
       case 5:
-          return popString.slice(0, 2) + ' thousand';
+          return popString.slice(0, 2)  + ',' + popString[3] + ' thousand';
       case 4:
-        return popString.slice(0, 1) + ' thousand';
+        return popString.slice(0, 1)  + ',' + popString[2] + ' thousand';
       case 3:
-        return popString.slice(0, 2) + ' thousand';
+        return popString.slice(0, 2)  + ',' + popString[3] + ' thousand';
       default:
         console.error('something went wrong');
         return 'gotta add more cases to the switch statement'
