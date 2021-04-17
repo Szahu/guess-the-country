@@ -74,6 +74,10 @@ const ScoreDisplay = (props) => {
   return <div id="scoreDisplay">Score: {props.score} / {props.total}</div>
 }
 
+const Footer = () => {
+  return <div id="footer">by Stanisław Solarewicz, statistic data fetched from: <a href="www.worldbank.org">www.worldbank.org</a></div>
+}
+
 class MainComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -126,6 +130,7 @@ class MainComponent extends React.Component {
   render() {
     return <div>
       <MainCard resetCallback={this.resetRandomCountryList} countries={this.state.randomCountries} correctOne={this.state.correctOne}/>
+      <Footer/>
       </div>;
   }
 }

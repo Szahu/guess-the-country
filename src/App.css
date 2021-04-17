@@ -145,3 +145,17 @@ button:focus {
     font-weight: 300;
     font-size: 35px;
 }
+
+#footer {
+    background-color: rgb(59, 59, 59);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0px 10px 0;
+    text-align: center;
+}
+
+a {
+    color: rgb(172, 172, 250);
+}
