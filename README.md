@@ -2,7 +2,9 @@
 This project can be previewd in action [Here:](https://szahu.github.io/guess-the-country)
 
 ## Todo plan: 
-- [ ] Add api data caching
+- [x] Add api data caching - thus removing the lag
+- [ ] Fetching data for multiple countries within one api call
+- [ ] Clean up the code
 - [ ] Display population of each country after guess is casted
 - [x] Make next button unclickable until guess is casted
 - [x] Keep the score 

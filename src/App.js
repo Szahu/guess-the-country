@@ -98,6 +98,8 @@ class MainComponent extends React.Component {
     this.jsonWithCounties = 0;
     this.allGuesses = 0;
     this.correctGuesses = 0;
+    
+    this.loadedCountriesData = [0,0,0,0];
   }
 
   async componentDidMount() {
@@ -109,12 +111,40 @@ class MainComponent extends React.Component {
       this.setState({randomCountries: randomCountries, correctOne: correctOne});
     });
 
+
+
+    //PRELOADING COUNTRY DATA
+    for(let i = 0;i < this.loadedCountriesData.length; i++) {
+      
+      let tempCountriesData = {};
+
+      await resetRandomCountryList(this.jsonWithCounties, (randomCountries, correctOne) => {
+          tempCountriesData.randomCountries=randomCountries; 
+          tempCountriesData.correctOne=correctOne;
+        });
+
+        this.loadedCountriesData[i]=tempCountriesData;
+    }
+
+
   }
 
   render() {
+
+    const onGuessCastCallback = () => {
+
+      this.loadedCountriesData.shift();
+      resetRandomCountryList(this.jsonWithCounties, 
+        (randomCountries, correctOne) => {
+          this.loadedCountriesData.push({randomCountries: randomCountries, correctOne: correctOne});
+        });
+
+      this.setState({randomCountries: this.loadedCountriesData[0].randomCountries, correctOne: this.loadedCountriesData[0].correctOne});
+    } 
+
+
     return <div>
-      <MainCard resetCallback={() => resetRandomCountryList(this.jsonWithCounties, (randomCountries, correctOne) => {
-      this.setState({randomCountries: randomCountries, correctOne: correctOne});})} 
+      <MainCard resetCallback={onGuessCastCallback} 
         countries={this.state.randomCountries} correctOne={this.state.correctOne}/>
       <Footer/>
       </div>;
