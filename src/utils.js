@@ -35,27 +35,43 @@ export const getCountryPopulation = async function (countryCode, callback) {
 
 //formatting population into readable string
 export function populationToFormatedString(population) {
+
+  let finalPopulation = '';
+
   if(population) {
     let popString = population.toString();
     switch(popString.length) {
+      case 10:
+        finalPopulation = popString.slice(0, 1) + ',' + popString[2] + ' billion';
+        break;
       case 9:
-        return popString.slice(0, 3) + ',' + popString[4] + ' million';
+        finalPopulation = popString.slice(0, 3) + ',' + popString[4] + ' million';
+        break;
       case 8:
-        return popString.slice(0, 2)  + ',' + popString[3] + ' million';
+        finalPopulation = popString.slice(0, 2)  + ',' + popString[3] + ' million';
+        break;
       case 7:
-        return popString.slice(0, 1)  + ',' + popString[2] + ' million';
+        finalPopulation = popString.slice(0, 1)  + ',' + popString[2] + ' million';
+        break;
       case 6:
-        return popString.slice(0, 3)  + ',' + popString[4] + ' thousand';
+        finalPopulation = popString.slice(0, 3)  + ',' + popString[4] + ' thousand';
+        break;
       case 5:
-          return popString.slice(0, 2)  + ',' + popString[3] + ' thousand';
+          finalPopulation = popString.slice(0, 2)  + ',' + popString[3] + ' thousand';
+          break;
       case 4:
-        return popString.slice(0, 1)  + ',' + popString[2] + ' thousand';
+        finalPopulation = popString.slice(0, 1)  + ',' + popString[2] + ' thousand';
+        break;
       case 3:
-        return popString.slice(0, 2)  + ',' + popString[3] + ' thousand';
+        finalPopulation = popString.slice(0, 2)  + ',' + popString[3] + ' thousand';
+        break;
       default:
         console.error('something went wrong');
         return 'gotta add more cases to the switch statement'
     }
+
+    return finalPopulation;
+
   } else {
     return 0;
   }

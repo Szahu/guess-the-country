@@ -2,14 +2,6 @@ import React, { useState } from "react";
 import { getCountryPopulation, populationToFormatedString, correctColor, wrongColor, hasADublet } from "./utils";
 import './App.css';
 
-// TODO: 
-//   [ ] -add api data caching
-//   [ ] -display population of each country
-//   [x] -make next button unclickable until guess Is casted
-//   [x] -keep the score 
-//   [ ] -not turn button red on focus
-//   [ ] -update population roundign algorithym
-
 const MainCard = (props) => {
 
     const [pressedIndex, setPressedIndex] = useState(-1);
