@@ -70,44 +70,34 @@ const Footer = () => {
   return <div id="footer">by Stanisław Solarewicz, statistic data fetched from: <a href="www.worldbank.org">www.worldbank.org</a></div>
 }
 
-class MainComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    //console.clear();
-    let randomCountries = [0, 0, 0, 0];
-
+const resetRandomCountryList = async (jsonWithCounties, callback) => {
+  let randomCountries = [0, 0, 0, 0];
+  while(hasADublet(randomCountries)) {
     for(let i = 0; i < randomCountries.length;i++) {
       randomCountries[i] = Math.floor(Math.random() * 200);
     }
-
-    const correctOne = Math.floor(Math.random() * 4);
-
-    this.state = {randomCountries: randomCountries, correctOne: correctOne, loaded: false};
-    this.jsonWithCounties = 0;
-    this.resetRandomCountryList = this.resetRandomCountryList.bind(this);
-    this.allGuesses = 0;
-    this.correctGuesses = 0;
   }
 
-  resetRandomCountryList = async () => {
-    let randomCountries = [0, 0, 0, 0];
-    while(hasADublet(randomCountries)) {
-      for(let i = 0; i < randomCountries.length;i++) {
-        randomCountries[i] = Math.floor(Math.random() * 200);
-      }
-    }
-  
-    randomCountries = randomCountries.map((x) => {return {name: this.jsonWithCounties[x].name, code: this.jsonWithCounties[x].code, population: 0}});
+  randomCountries = randomCountries.map((x) => {return {name: jsonWithCounties[x].name, code: jsonWithCounties[x].code, population: 0}});
 
-    for(let i = 0; i < randomCountries.length; i++) {
-       await getCountryPopulation(randomCountries[i].code, (data) => {
-        randomCountries[i].population = data;
-      });
-    } 
-    const correctOne = Math.floor(Math.random() * 4);
+  for(let i = 0; i < randomCountries.length; i++) {
+     await getCountryPopulation(randomCountries[i].code, (data) => {
+      randomCountries[i].population = data;
+    });
+  } 
+  const correctOne = Math.floor(Math.random() * 4);
 
-    this.setState({randomCountries: randomCountries, correctOne: correctOne})
-  
+  callback(randomCountries, correctOne);
+}
+
+class MainComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {randomCountries: [1,1,1,1], correctOne: 0, loaded: false};
+    this.jsonWithCounties = 0;
+    this.allGuesses = 0;
+    this.correctGuesses = 0;
   }
 
   async componentDidMount() {
@@ -115,13 +105,17 @@ class MainComponent extends React.Component {
     const response = await fetch('countryList.json');
     this.jsonWithCounties = await response.json();
 
-    this.resetRandomCountryList();
+    resetRandomCountryList(this.jsonWithCounties, (randomCountries, correctOne) => {
+      this.setState({randomCountries: randomCountries, correctOne: correctOne});
+    });
 
   }
 
   render() {
     return <div>
-      <MainCard resetCallback={this.resetRandomCountryList} countries={this.state.randomCountries} correctOne={this.state.correctOne}/>
+      <MainCard resetCallback={() => resetRandomCountryList(this.jsonWithCounties, (randomCountries, correctOne) => {
+      this.setState({randomCountries: randomCountries, correctOne: correctOne});})} 
+        countries={this.state.randomCountries} correctOne={this.state.correctOne}/>
       <Footer/>
       </div>;
   }
