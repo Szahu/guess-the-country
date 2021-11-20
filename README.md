@@ -1,5 +1,5 @@
 # Web guess the country quiz created with React
-This project can be previewd in action [Here:](https://szahu.github.io/guess-the-country)
+This project can be previewed in action [Here:](https://szahu.github.io/guess-the-country)
 
 ## Todo plan: 
 - [x] Add api data caching - thus removing the lag
